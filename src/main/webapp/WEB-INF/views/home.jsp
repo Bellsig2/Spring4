@@ -2,13 +2,10 @@
 <%@ page session="false" %>
 <html>
 <head>
+	<c:import url="./temp/header.jsp"></c:import>
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<c:import url="./temp/nav.jsp"></c:import>
 </body>
 </html>
