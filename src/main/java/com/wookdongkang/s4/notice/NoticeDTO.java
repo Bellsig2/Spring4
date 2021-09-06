@@ -7,7 +7,7 @@ public class NoticeDTO {
 	private String title;
 	private String contents;
 	private String writer;
-	private String regdate;
+	private Date regdate;
 	private int hits;
 	
 	public int getNum() {
@@ -34,11 +34,11 @@ public class NoticeDTO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public String getRegdate() {
+	public Date getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setRegdate(Date date) {
+		this.regdate = date;
 	}
 	public int getHits() {
 		return hits;
