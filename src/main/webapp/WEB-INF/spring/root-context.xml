@@ -19,9 +19,12 @@
 		<property name="dataSource" ref="dataSource"></property> <!-- 데이터소스 -->
 		<!-- 배포시에 리소스 폴더 없어지고 안에 있는건 classes 폴더로 이동함 -->
 		<property name="mapperLocations" value="classpath:database/mappers/*Mapper.xml"></property>
+		<property name="configLocation" value="classpath:database/config/myBatisConfig.xml"></property>
 	</bean>
 
 	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
+	
+
 </beans>

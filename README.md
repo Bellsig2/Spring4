@@ -27,3 +27,6 @@
  	3. 글쓰기
  	4. 삭제
  	5. 수정
+ 	
+ ### QnA
+ num title contents writer regDate hit ref step depth

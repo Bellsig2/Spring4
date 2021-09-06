@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wookdongkang.s4.board.notice.NoticeDAO">
+	<select id="getList"
+		resultType="NoticeDTO">
+		SELECT * FROM
+		(SELECT rownum R, BK.* FROM
+		(SELECT *
+		FROM NOTICE
+		ORDER BY NUM desc
+		)
+		BK
+		)
+		WHERE R
+		between #{startRow} and #{lastRow}
+	</select>
+
+	<select id="getSelect"
+		parameterType="com.wookdongkang.s1.bankbook.BankbookDTO"
+		resultType="com.wookdongkang.s1.bankbook.BankbookDTO">
+		SELECT * FROM BANKBOOK WHERE BOOK_NUMBER=#{book_number}
+	</select>
+
+	<insert id="setInsert"
+		parameterType="com.wookdongkang.s1.bankbook.BankbookDTO">
+		INSERT INTO
+		BANKBOOK VALUES(bankbook_seq.nextval,
+		#{book_name}, #{book_rate},
+		#{book_sale})
+	</insert>
+
+	<delete id="setDelete" parameterType="java.lang.Long">
+		DELETE BANKBOOK WHERE
+		BOOK_NUMBER = #{bookNumber}
+	</delete>
+
+	<update id="setUpdate"
+		parameterType="com.wookdongkang.s1.bankbook.BankbookDTO">
+		UPDATE BANKBOOK SET BOOK_NAME = #{book_name}, BOOK_RATE
+		= #{book_rate}, BOOK_SALE = #{book_sale}
+		WHERE BOOK_NUMBER =
+		#{book_number}
+	</update>
+</mapper>
