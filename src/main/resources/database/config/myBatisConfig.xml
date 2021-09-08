@@ -2,10 +2,12 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  
-  <configuration>
-  	<typeAliases>
-  		<typeAlias type="com.wookdongkang.s4.board.BoardDTO" alias="BoardDTO"/>
-  		<typeAlias type="com.wookdongkang.s4.board.notice.NoticeDTO" alias="NoticeDTO"/>
-  	</typeAliases>
-  </configuration>
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.wookdongkang.s4.board.BoardDTO" alias="BoardDTO" />
+		<typeAlias type="com.wookdongkang.s4.board.notice.NoticeDTO" alias="NoticeDTO" />
+		<typeAlias type="com.wookdongkang.s4.board.qna.QnaDTO" alias="QnaDTO" />
+		<typeAlias type="java.lang.Long" alias="Long" />
+	</typeAliases>
+</configuration>
