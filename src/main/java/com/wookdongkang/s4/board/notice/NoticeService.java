@@ -7,29 +7,34 @@ import org.springframework.stereotype.Service;
 
 import com.wookdongkang.s4.board.BoardDTO;
 import com.wookdongkang.s4.board.BoardService;
+import com.wookdongkang.s4.util.Pager;
 
 @Service
 public class NoticeService implements BoardService {
-	
 	@Autowired
 	private NoticeDAO noticeDAO;
-	
+
 	@Override
-	public List<BoardDTO> getList() throws Exception {
+	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeDAO.getList();
+		Long totalCount = noticeDAO.getCount(pager);
+		pager.makeNum(totalCount);
+		pager.makeRow();
+
+		return noticeDAO.getList(pager);
 	}
 
 	@Override
 	public BoardDTO getSelect(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		noticeDAO.setHitUpdate(boardDTO);
+		return noticeDAO.getSelect(boardDTO);
 	}
 
 	@Override
 	public int setInsert(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return noticeDAO.setInsert(boardDTO);
 	}
 
 	@Override
@@ -39,7 +44,7 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setUpdate(BoardDTO boradDTO) throws Exception {
+	public int setUpdate(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

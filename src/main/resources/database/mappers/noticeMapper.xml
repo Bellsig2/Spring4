@@ -2,36 +2,64 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.wookdongkang.s4.board.notice.NoticeDAO">
+  		<select id="getCount" resultType="Long" parameterType="Pager">
+  			SELECT COUNT(num) FROM NOTICE
+  			
+  			<if test="kind == 'k1'">WHERE title LIKE '%' || #{search} || '%'</if>
+  			<if test="kind == 'k2'">WHERE contents LIKE '%' || #{search} || '%'</if>
+  			<if test="kind == 'k3'">WHERE writer LIKE '%' || #{search} || '%'</if>
+  			
+  			
+  		</select>
+  
+  
+		<select id="getList" resultType="NoticeDTO" parameterType="Pager">
+			SELECT * FROM
+			(SELECT ROWNUM R, BK.* FROM
+				(SELECT * FROM NOTICE
+				 WHERE 
+				 	<choose>
+				 		<when test="kind=='k1'">
+				 			title
+				 		</when>
+				 		<when test="kind=='k2'">
+				 			contents
+				 		</when>
+				 		<otherwise>
+				 			writer
+				 		</otherwise>
+				 	</choose>
+				 	LIKE '%' || #{search} || '%'
+				  	
+			ORDER BY NUM DESC)BK)
+			WHERE R BETWEEN #{startRow} and #{lastRow}
+			
+		</select>
+		
+		<select id="getSelect" parameterType="BoardDTO" resultType="NoticeDTO">
+			SELECT * FROM NOTICE WHERE NUM=#{num}
+		</select>
+		
+		<update id="setHitUpdate" parameterType="BoardDTO">
+			update notice set hits= hits+1 where num=#{num}
+		</update>
+	
+		<insert id="setInsert" parameterType="BoardDTO">
+			INSERT INTO NOTICE(NUM,TITLE,CONTENTS,WRITER,REGDATE,HITS)
+			VALUES(NOTICE_SEQ.NEXTVAL,#{title},#{contents},#{writer},SYSDATE,0)
+		</insert>
+	
+		<delete id="setDelete" parameterType="BoardDTO">
+			DELETE FROM NOTICE WHERE NUM=#{num}
+		</delete>
+		
+		<update id="setUpdate" parameterType="BoardDTO">
+			UPDATE NOTICE SET TITLE=#{title},CONTENTS=#{contents},WRITER=#{writer} 
+			WHERE NUM=#{num}
+		</update>
 
-<mapper namespace="com.wookdongkang.s4.board.notice.NoticeDAO">
-	<select id="getList" resultType="NoticeDTO">
-		SELECT * FROM
-		(SELECT ROWNUM R, BK.* FROM
-		(SELECT*
-		FROM NOTICE
-		ORDER BY NUM DESC)BK)
 
-	</select>
-
-	<select id="getSelect" parameterType="BoardDTO"
-		resultType="NoticeDTO">
-		SELECT * FROM NOTICE WHERE NUM=#{num}
-	</select>
-
-	<insert id="setInsert" parameterType="BoardDTO">
-		INSERT INTO NOTICE(NUM,TITLE,CONTENTS,WRITER,REGDATE,HITS)
-		VALUES(NOTICE_SEQ.NEXTVAL,#{title},#{contents},#{writer},SYSDATE,0)
-	</insert>
-
-	<delete id="setDelete" parameterType="BoardDTO">
-		DELETE FROM NOTICE WHERE NUM=#{num}
-	</delete>
-
-	<update id="setUpdate" parameterType="BoardDTO">
-		UPDATE NOTICE SET TITLE=#{title},CONTENTS=#{contents},WRITER=#{writer}
-		WHERE NUM=#{num}
-	</update>
-
-
-
-</mapper>
+  
+  </mapper>

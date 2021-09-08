@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wookdongkang.s4.board.BoardDAO;
 import com.wookdongkang.s4.board.BoardDTO;
+import com.wookdongkang.s4.util.Pager;
 
 @Repository
 public class NoticeDAO implements BoardDAO{
@@ -17,21 +18,27 @@ public class NoticeDAO implements BoardDAO{
 	private final String NAMESPACE="com.wookdongkang.s4.board.notice.NoticeDAO.";
 	
 	@Override
-	public Long getCount() throws Exception {
+	public Long getCount(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"getCount", pager);
 	}
 
 	@Override
-	public List<BoardDTO> getList() throws Exception {
+	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE+"getList");
+		return sqlSession.selectList(NAMESPACE+"getList", pager);
 	}
 
 	@Override
 	public BoardDTO getSelect(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int setHitUpdate(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(NAMESPACE+"setHitUpdate", boardDTO);
 	}
 
 	@Override

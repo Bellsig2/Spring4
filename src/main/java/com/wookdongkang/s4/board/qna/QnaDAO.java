@@ -8,23 +8,31 @@ import org.springframework.stereotype.Repository;
 
 import com.wookdongkang.s4.board.BoardDAO;
 import com.wookdongkang.s4.board.BoardDTO;
+import com.wookdongkang.s4.util.Pager;
 
 @Repository
 public class QnaDAO implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.wookdongkang.board.qna.QnaDAO.";
+	private final String NAMESPACE="com.wookdongkang.s4.board.qna.QnaDAO.";
+
+	
+	
 	@Override
 	public Long getCount() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+
+
 	@Override
 	public List<BoardDTO> getList() throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE+"getList");
+		return null;
 	}
+
+
 
 	@Override
 	public BoardDTO getSelect(BoardDTO boardDTO) throws Exception {
@@ -32,10 +40,16 @@ public class QnaDAO implements BoardDAO {
 		return null;
 	}
 
+
+
 	@Override
 	public int setInsert(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public int setReplyUpdate(QnaDTO qnaDTO)throws Exception{
+		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaDTO);
 	}
 
 	@Override
@@ -44,15 +58,19 @@ public class QnaDAO implements BoardDAO {
 		return 0;
 	}
 
+
+
 	@Override
 	public int setUpdate(BoardDTO boradDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	// 답글
-	public int setReply(QnaDTO qnaDTO) throws Exception{
-		return 0;
+
+
+
+	//답글
+	public int setReply(QnaDTO qnaDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setReply", qnaDTO);
 	}
 
 }

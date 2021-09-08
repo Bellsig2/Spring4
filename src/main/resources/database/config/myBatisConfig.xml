@@ -9,5 +9,6 @@
 		<typeAlias type="com.wookdongkang.s4.board.notice.NoticeDTO" alias="NoticeDTO" />
 		<typeAlias type="com.wookdongkang.s4.board.qna.QnaDTO" alias="QnaDTO" />
 		<typeAlias type="java.lang.Long" alias="Long" />
+		<typeAlias alias="Pager" type="com.wookdongkang.s4.util.Pager"/>
 	</typeAliases>
 </configuration>
