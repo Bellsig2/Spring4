@@ -27,7 +27,14 @@
 	</c:if>
 	</div>
 	
+	<div>
+		<input class = "c1" type="checkbox" value="1" checked="checked">
+		<input class = "c1" type="checkbox" value="2">
+		<input class = "c1" type="checkbox" value="3" checked="checked">
+		<input class = "c1" type="checkbox" value="4">
+	</div>
+	<button id = "btn" >check</button>
 	
-
+<script type="text/javascript" src="../resources/js/select.js"></script>
 </body>
 </html>

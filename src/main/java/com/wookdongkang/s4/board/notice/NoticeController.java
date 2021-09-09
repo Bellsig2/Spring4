@@ -54,7 +54,6 @@ public class NoticeController {
 	}
 	
 	
-//	@RequestMapping(value = "list", method = RequestMethod.GET)
 	@GetMapping("list")
 	public ModelAndView getList(Pager pager)throws Exception{
 		ModelAndView mv = new ModelAndView();
