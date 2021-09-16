@@ -56,7 +56,7 @@
 		<select id="getSelect" parameterType="BoardDTO" resultType="NoticeDTO" resultMap="getSelectResult">
 			SELECT N.*, NF.*
 			FROM NOTICE N
-				 INNER JOIN
+				 LEFT JOIN
 				 NOTICEFILES NF
 			ON (N.NUM = NF.NUM)
 			WHERE N.NUM=#{num}
