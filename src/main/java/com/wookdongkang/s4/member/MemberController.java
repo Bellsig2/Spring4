@@ -122,7 +122,7 @@ public class MemberController {
 		memberFilesDTO = memberService.getSelectFiles(memberFilesDTO);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("member/mypage");
-		modelAndView.addObject("file", memberFilesDTO);
+		/* modelAndView.addObject("file", memberFilesDTO); */
 		return modelAndView;
 	}
 	

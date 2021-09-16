@@ -30,8 +30,7 @@ public class FileManager {
 		return fileName;
 	}
 	
-	public void fileDelete(File file) {
-		file.delete();
-	}
+	  public void fileDelete(File file) { file.delete(); }
+	
 
 }

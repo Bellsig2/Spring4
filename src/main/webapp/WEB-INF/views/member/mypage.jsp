@@ -17,7 +17,7 @@
 	NAME : <input type="text" value = "${member.name}"  class="update" readonly="readonly">
 	PHONE : <input type="tel" value ="${member.phone}" name = "phone" class="update">
 	Email : <input type="text" value = "${member.email}" name = "email" class="update">
-	<img alt="" src="../resources/upload/member/${file.filename}">
+	<img alt="" src="../resources/upload/member/${member.memberFilesDTO}">
 	<button type = "button" id = "update_btn">수정</button>
 	</form>
 	<a href = "./delete?id=${sessionScope.member.id}&pw=${sessionScope.member.pw}"><button type = "button" id = "btn">회원탈퇴</button></a>

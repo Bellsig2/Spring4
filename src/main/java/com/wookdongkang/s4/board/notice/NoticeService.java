@@ -82,9 +82,8 @@ public class NoticeService implements BoardService {
 			fileManger.fileDelete(file);
 		}		
 		
-		noticeDAO.setDelete(boardDTO);
 		
-		return 0;
+		return noticeDAO.setDelete(boardDTO);
 	}
 
 	@Override

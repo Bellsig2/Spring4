@@ -10,7 +10,6 @@ public interface BoardDAO {
 		// file 
 		public int setFile(BoardFilesDTO boardFilesDTO);
 		
-		
 		//전체 갯수
 		public Long getCount(Pager pager)throws Exception; 
 		

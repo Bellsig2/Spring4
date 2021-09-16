@@ -2,35 +2,61 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="com.wookdongkang.s4.member.MemberDAO">
-  	<select id="getIdCheck" parameterType="MemberDTO" resultType="MemberDTO">
-  		SELECT ID FROM MEMBER WHERE ID = #{id}
-  	</select>
-  	
-  	<select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
-  		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = #{pw}	
-  	</select>
-  	
-  	<insert id="setJoin" parameterType="MemberDTO">
-  		INSERT INTO MEMBER VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email})
-  	</insert>
-  	
-  	<delete id="setDelete" parameterType="MemberDTO">
-  		DELETE MEMBER WHERE ID=#{id} AND PW=#{pw}
-  	</delete>
-  	
-  	<update id="setUpdate">
-  		UPDATE MEMBER SET PW=#{pw}, PHONE={#phone}, EMAIL=#{email} WHERE ID = #{id} 
-  	</update>
-  	
-  	 <insert id="setFileInsert" parameterType="MemberFilesDTO">
-  		INSERT INTO MEMBERFILES (num, id, fileName, oriname) 
-  		VALUES(files_seq.nextval, #{id}, #{filename}, #{oriname})
-  	</insert>
-  	
-  	<select id="getSelectFiles" parameterType="MemberFilesDTO" resultType="MemberFilesDTO">
-  		SELECT * FROM MEMBERFILES WHERE ID = #{id}
-  	</select>
-  </mapper>
+
+<mapper namespace="com.wookdongkang.s4.member.MemberDAO">
+
+
+	<resultMap type="MemberDTO" id="getLoginResult">
+		<id column="id" property="id" />
+		<result column="pw" property="pw" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+		<!-- 1:1 관계, DTO 내에 다른 DTO 하나가 멤버변수로 선언 -->
+		<association property="memberFilesDTO" javaType="MemberFilesDTO">
+			<id column="num" property="num" />
+			<result column="fileName" property="fileName" />
+			<result column="oriName" property="oriName" />
+		</association>
+	</resultMap>
+
+	<select id="getIdCheck" parameterType="MemberDTO"
+		resultType="MemberDTO">
+		SELECT ID FROM MEMBER WHERE ID = #{id}
+	</select>
+
+	<select id="getLogin" parameterType="MemberDTO" resultMap="getLoginResult">
+		resultType="MemberDTO">
+		SELECT * FROM MEMBER M INNER JOIN MEMBERFILES F USING(ID)
+		WHERE ID = {id}
+		AND PW = #{pw}
+	</select>
+
+	<insert id="setJoin" parameterType="MemberDTO">
+		INSERT INTO MEMBER
+		VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email})
+	</insert>
+
+	<delete id="setDelete" parameterType="MemberDTO">
+		DELETE MEMBER WHERE
+		ID=#{id} AND PW=#{pw}
+	</delete>
+
+	<update id="setUpdate">
+		UPDATE MEMBER SET PW=#{pw}, PHONE={#phone},
+		EMAIL=#{email} WHERE ID = #{id}
+	</update>
+
+	<insert id="setFileInsert" parameterType="MemberFilesDTO">
+		INSERT INTO MEMBERFILES
+		(num, id, fileName, oriname)
+		VALUES(files_seq.nextval, #{id},
+		#{filename}, #{oriname})
+	</insert>
+
+	<select id="getSelectFiles" parameterType="MemberFilesDTO"
+		resultType="MemberFilesDTO">
+		SELECT * FROM MEMBERFILES WHERE ID = #{id}
+	</select>
+</mapper>
   
