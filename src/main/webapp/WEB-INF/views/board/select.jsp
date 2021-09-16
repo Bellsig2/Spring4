@@ -21,7 +21,7 @@
 		<h3>HITS:${dto.hits}</h3>
 		<c:forEach items="${fileList}" var = "f">
 			<div>
-				<img alt="" src="../resources/upload/${board}/${f.fileName}">
+				<img alt="" src="../resources/upload/${board}/${member.memberFilesDTO.filename}">
 			</div>
 		</c:forEach>
 	
