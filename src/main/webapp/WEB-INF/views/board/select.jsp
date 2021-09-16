@@ -21,7 +21,7 @@
 		<h3>HITS:${dto.hits}</h3>
 		<c:forEach items="${dto.files}" var = "f">
 			<div>
-				<img alt="" src="../resources/upload/${board}/${f.fileName}">
+				<a href ="../down?fileName=${board}/${f.fileName}">${f.oriName}</a>
 			</div>
 		</c:forEach>
 	

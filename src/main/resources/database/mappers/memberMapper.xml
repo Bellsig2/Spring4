@@ -15,8 +15,8 @@
 		<!-- 1:1 관계, DTO 내에 다른 DTO 하나가 멤버변수로 선언 -->
 		<association property="memberFilesDTO" javaType="MemberFilesDTO">
 			<id column="num" property="num" />
-			<result column="filename" property="filename" />
-			<result column="oriname" property="oriname" />
+			<result column="fileName" property="fileName" />
+			<result column="oriName" property="oriName" />
 		</association>
 	</resultMap>
 
@@ -48,7 +48,7 @@
 
 	<insert id="setFileInsert" parameterType="MemberFilesDTO">
 		INSERT INTO MEMBERFILES
-		(num, id, fileName, oriname)
+		(num, id, filename, oriname)
 		VALUES(files_seq.nextval, #{id},
 		#{filename}, #{oriname})
 	</insert>
