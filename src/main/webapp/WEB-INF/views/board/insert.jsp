@@ -18,7 +18,7 @@
 
 <div class="container-fluid">
 	
-		<form id="frm" class="col-md-6 mx-auto" action="./insert" method="post" >
+		<form id="frm" class="col-md-6 mx-auto" action="./insert" method="post" enctype="multipart/form-data">
 		  <div class="mb-3">
 		    <label for="title" class="form-label">TITLE</label>
 		    <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title">
@@ -36,10 +36,20 @@
   			<textarea class="form-control" cols=""  name="contents" id="exampleFormControlTextarea1" rows="6"></textarea>
 		  </div>
 		 	
-		  <button id ="btn"type="button" class="btn btn-primary">ADD</button>
+		  <div class = "mb-3" id = "con">
+		  	<button type = "button" id = "add_btn">추가</button>
+		  </div>
+		 	
+		 <div id="fileAddResult">
+		 
+		 </div>
+		 	
+		  <button id ="btn"type="button" class="btn btn-primary">작성</button>
 		</form>
-	
+
+
 </div>
 	<script type="text/javascript" src = "../resources/js/boardCheck.js"></script>
+	<script type="text/javascript" src = "../resources/js/boardFile.js"></script>
 </body>
 </html>

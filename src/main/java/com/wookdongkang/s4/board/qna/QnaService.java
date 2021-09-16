@@ -1,25 +1,63 @@
 package com.wookdongkang.s4.board.qna;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wookdongkang.s4.board.BoardDTO;
+import com.wookdongkang.s4.board.BoardFilesDTO;
 import com.wookdongkang.s4.board.BoardService;
+import com.wookdongkang.s4.util.FileManager;
 import com.wookdongkang.s4.util.Pager;
 @Service
 public class QnaService implements BoardService {
 	
 	@Autowired
 	private QnaDAO qnaDAO;
-
-
 	
+	@Autowired
+	private ServletContext sc;
+	
+	@Autowired
+	private FileManager fileManager;
+
+
+
+	@Override
+	public int setInsert(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+		int result = qnaDAO.setInsert(boardDTO);
+		String realPath = sc.getRealPath("/resources/upload/qna/");
+		System.out.println(realPath);
+		File file = new File(realPath);
+		for(MultipartFile multipartFile : files) {
+			String fileName = fileManager.fileSave(multipartFile, file);
+			BoardFilesDTO boardFilesDTO = new BoardFilesDTO();
+			boardFilesDTO.setNum(boardDTO.getNum());
+			boardFilesDTO.setFileName(fileName);
+			boardFilesDTO.setOriName(multipartFile.getOriginalFilename());
+			
+			result = qnaDAO.setFile(boardFilesDTO);
+		}
+		
+		
+		return result;
+	}
+
+
+
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		Long totalCount = qnaDAO.getCount(pager);
+		pager.makeNum(totalCount);
+		pager.makeRow();
+		return qnaDAO.getList(pager);
 	}
 
 
@@ -27,15 +65,8 @@ public class QnaService implements BoardService {
 	@Override
 	public BoardDTO getSelect(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public int setInsert(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		qnaDAO.setHitUpdate(boardDTO);
+		return qnaDAO.getSelect(boardDTO);
 	}
 
 

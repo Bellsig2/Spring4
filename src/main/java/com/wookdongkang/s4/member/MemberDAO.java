@@ -29,5 +29,13 @@ public class MemberDAO {
 	public int setUpdate(MemberDTO memberDTO) {
 		return session.update(NAMEPSACE+"setUpdate", memberDTO);
 	}
+	
+	public int setFileInsert(MemberFilesDTO memberFilesDTO) {
+		return session.insert(NAMEPSACE+"setFileInsert", memberFilesDTO);
+	}
+	
+	public MemberFilesDTO getSelectFiles(MemberFilesDTO memberFilesDTO) {
+		return session.selectOne(NAMEPSACE+"getSelectFiles", memberFilesDTO);
+	}
 	     
 }

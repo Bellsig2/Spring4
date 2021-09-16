@@ -19,6 +19,11 @@
 		<h3>Writer:${dto.writer}</h3>
 		<h3>DATE:${dto.regDate}</h3>
 		<h3>HITS:${dto.hits}</h3>
+		<c:forEach items="${fileList}" var = "f">
+			<div>
+				<img alt="" src="../resources/upload/${board}/${f.fileName}">
+			</div>
+		</c:forEach>
 	
 	<a href="./delete?num=${dto.num}">DELETE</a>
 	<a href="./update?num=${dto.num}">UPDATE</a>

@@ -1,34 +1,26 @@
 /**
  * 
  */
-const check = document.getElementsByClassName("check");
-const checkAll = document.getElementById("checkAll");
-const btn = document.getElementById("btn");
 
-checkAll.addEventListener("click", function() {
-	for(let i of check) {
-		i.checked = checkAll.checked;
-	}
+
+$("#checkAll").click(function(){
+	$(".check").prop("checked", $("this").prop("checked"));
 });
 
-for(let i of check) {
-	i.addEventListener("click", function(){
-		let result = true;
-		for(c of check){
-			if(!c.checked){
-				result = false;
-				break;
-			}
+$(".check").click(function(){
+	$(".check").each(function(v1,v2){
+		if(!$(v2).prop("checked")){
+			result=false;
+			console.log(v1, $(v2).prop("checked"));
 		}
-		checkAll.checked = result;
-	})
-} 
+	});
+	$("#checkAll").prop("checked", result);
+});
 
-btn.addEventListener("click", function(){
-	if(checkAll.checked == true) {
-		location.href = "./join";
-	}
-	else{
-		alert("필수약관에 동의하셔야 합니다.");
-	}
-})
+$("#btn").click(function(){
+	if($("#checkAll").prop("checked")) {
+		location.href="join";
+		}else {
+			alert('약관동의 필수');
+		}
+	})

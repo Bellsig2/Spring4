@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -48,9 +49,14 @@ public class MemberController {
 	}
 
 	@PostMapping("join")
-	public ModelAndView join(MemberDTO memberDTO) throws Exception {
+	public ModelAndView join(MemberDTO memberDTO, MultipartFile photo, HttpSession httpSession) throws Exception {
+		
+		String original = photo.getOriginalFilename();
+		System.out.println("Original : "+original);
+		System.out.println("Name : "+photo.getName());
+		
 		ModelAndView modelAndView = new ModelAndView();
-		int result = memberService.setJoin(memberDTO);
+		int result = memberService.setJoin(memberDTO, photo, httpSession);
 		String message = "회원가입 실패";
 		if(result>0) {
 			message = "화원가입 성공";
@@ -88,9 +94,11 @@ public class MemberController {
 
 	@GetMapping("delete")
 	public ModelAndView delete(MemberDTO memberDTO) {
+		MemberFilesDTO memberFilesDTO = new MemberFilesDTO();
+		memberFilesDTO.setId(memberDTO.getId());
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:../");
-		memberService.setDelete(memberDTO);
+		memberService.setDelete(memberDTO, memberFilesDTO);
 		return modelAndView;
 	}
 
@@ -106,9 +114,15 @@ public class MemberController {
 	}
 
 	@GetMapping("mypage")
-	public ModelAndView myPage() {
+	public ModelAndView myPage(HttpSession httpSession) {
+		MemberFilesDTO memberFilesDTO = new MemberFilesDTO();
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("member");
+		String result = memberDTO.getId();
+		memberFilesDTO.setId(result);
+		memberFilesDTO = memberService.getSelectFiles(memberFilesDTO);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("member/mypage");
+		modelAndView.addObject("file", memberFilesDTO);
 		return modelAndView;
 	}
 	

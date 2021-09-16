@@ -2,6 +2,8 @@ package com.wookdongkang.s4.board;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.wookdongkang.s4.util.Pager;
 
 public interface BoardService {
@@ -13,7 +15,8 @@ public interface BoardService {
 	public abstract BoardDTO getSelect(BoardDTO boardDTO) throws Exception;
 
 	// 글쓰기
-	public abstract int setInsert(BoardDTO boardDTO) throws Exception;
+	
+	public abstract int setInsert(BoardDTO boardDTO, MultipartFile [] files) throws Exception;
 
 	// 글삭제
 	public abstract int setDelete(BoardDTO boardDTO) throws Exception;

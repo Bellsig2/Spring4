@@ -2,11 +2,16 @@ package com.wookdongkang.s4.board;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.wookdongkang.s4.util.Pager;
 
 public interface BoardDAO {
-	
-	//전체 갯수
+		// file 
+		public int setFile(BoardFilesDTO boardFilesDTO);
+		
+		
+		//전체 갯수
 		public Long getCount(Pager pager)throws Exception; 
 		
 		//List
@@ -19,6 +24,7 @@ public interface BoardDAO {
 		public int setHitUpdate(BoardDTO boardDTO)throws Exception;
 		
 		//글쓰기
+		
 		public int setInsert(BoardDTO boardDTO)throws Exception;
 		
 		//글삭제
@@ -26,4 +32,6 @@ public interface BoardDAO {
 		
 		//글수정
 		public int setUpdate(BoardDTO boardDTO)throws Exception;
+		
+		
 }

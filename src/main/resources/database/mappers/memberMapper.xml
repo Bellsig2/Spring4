@@ -23,5 +23,14 @@
   	<update id="setUpdate">
   		UPDATE MEMBER SET PW=#{pw}, PHONE={#phone}, EMAIL=#{email} WHERE ID = #{id} 
   	</update>
+  	
+  	 <insert id="setFileInsert" parameterType="MemberFilesDTO">
+  		INSERT INTO MEMBERFILES (num, id, fileName, oriname) 
+  		VALUES(files_seq.nextval, #{id}, #{filename}, #{oriname})
+  	</insert>
+  	
+  	<select id="getSelectFiles" parameterType="MemberFilesDTO" resultType="MemberFilesDTO">
+  		SELECT * FROM MEMBERFILES WHERE ID = #{id}
+  	</select>
   </mapper>
   

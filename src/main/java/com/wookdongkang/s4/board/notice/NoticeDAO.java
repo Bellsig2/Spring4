@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wookdongkang.s4.board.BoardDAO;
 import com.wookdongkang.s4.board.BoardDTO;
+import com.wookdongkang.s4.board.BoardFilesDTO;
 import com.wookdongkang.s4.util.Pager;
 
 @Repository
@@ -16,6 +18,10 @@ public class NoticeDAO implements BoardDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.wookdongkang.s4.board.notice.NoticeDAO.";
+	
+	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO) {
+		return sqlSession.selectList(NAMESPACE+"getFiles", boardDTO);
+	}
 	
 	@Override
 	public Long getCount(Pager pager) throws Exception {
@@ -42,6 +48,13 @@ public class NoticeDAO implements BoardDAO{
 	}
 
 	@Override
+	public int setFile(BoardFilesDTO boardFilesDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE+"setFile", boardFilesDTO);
+	}
+
+
+	@Override
 	public int setInsert(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(NAMESPACE+"setInsert", boardDTO);
@@ -50,7 +63,7 @@ public class NoticeDAO implements BoardDAO{
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
 	}
 
 	@Override
@@ -58,5 +71,6 @@ public class NoticeDAO implements BoardDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
 	
 }

@@ -24,5 +24,11 @@
 	<img class="c1" id="d3" alt="key" src="./resources/images/key2.jpg">
 	<P>The time on the server is ${serverTime}.</P>
 	
+	<button id = "btn">CLICK</button>
+	<script type="text/javascript">
+		$("#btn").click(function(){
+			alert('alert');
+		})
+	</script>
 </body>
 </html>
