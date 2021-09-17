@@ -56,7 +56,8 @@
 		 <button id = "btn" type="submit" class="btn btn-dark">가입</button>
 	</form>
 </div>
-<!-- <script type="text/javascript" src="../resources/js/join.js"></script>
-<script type="text/javascript" src="../resources/js/file.js"></script> -->
+<script type="text/javascript" src="../resources/js/join.js"></script>
+<script type="text/javascript" src="../resources/js/file.js"></script>
+
 </body>
 </html>

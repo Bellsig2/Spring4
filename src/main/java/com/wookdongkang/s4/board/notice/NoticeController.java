@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wookdongkang.s4.board.BoardDTO;
 import com.wookdongkang.s4.board.BoardFilesDTO;
+import com.wookdongkang.s4.board.CommentsDTO;
 import com.wookdongkang.s4.util.Pager;
 
 @Controller
@@ -95,6 +96,15 @@ public class NoticeController {
 		
 		mv.setViewName("common/result");
 		
+		return mv;
+	}
+	
+	@PostMapping("comment")
+	public ModelAndView comment(CommentsDTO commentDTO) {
+		System.out.println(commentDTO.getNum());
+		System.out.println(commentDTO.getWriter());
+		System.out.println(commentDTO.getContents());
+		ModelAndView mv = new ModelAndView();
 		return mv;
 	}
 

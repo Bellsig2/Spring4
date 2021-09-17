@@ -15,8 +15,8 @@
 		<!-- 1:1 관계, DTO 내에 다른 DTO 하나가 멤버변수로 선언 -->
 		<association property="memberFilesDTO" javaType="MemberFilesDTO">
 			<id column="num" property="num" />
-			<result column="fileName" property="fileName" />
-			<result column="oriName" property="oriName" />
+			<result column="fileName" property="filename" />
+			<result column="oriName" property="oriname" />
 		</association>
 	</resultMap>
 

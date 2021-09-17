@@ -21,13 +21,16 @@
 		<h3>In DIV</h3>
 	</div>
 	<button onclick="fn1()">click</button>
-	<img class="c1" id="d3" alt="key" src="./resources/images/key2.jpg">
-	<P>The time on the server is ${serverTime}.</P>
+	<div id="ar">
+	</div>
 	
 	<button id = "btn">CLICK</button>
 	<script type="text/javascript">
 		$("#btn").click(function(){
-			alert('alert');
+			$.get("./ajax/t1?num=1", function (result){
+				console.log(result.trim());
+				$('#ar').html(result.trim());
+			});
 		})
 	</script>
 </body>

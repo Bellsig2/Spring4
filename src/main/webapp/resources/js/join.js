@@ -2,6 +2,17 @@
  * 
  */
 
+$('#id').blur(function() {
+	let id = $('#id').val();
+	$.get('./idCheckAjax?id='+id, function(data){
+		if(data.trim()=='1') {
+			$('#idResult').html('사용 가능');
+		}else {
+			$('#idResult').html('사용 불가능');
+		}
+	});
+})
+
 $("#btn").click(function() {
 	let result = true;
 	let t;
@@ -11,8 +22,8 @@ $("#btn").click(function() {
 			t = s2;
 		}
 	});
-	
-	if(result) {
+
+	if (result) {
 		alert('submit');
 	}
 	else {
