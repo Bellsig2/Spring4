@@ -19,9 +19,14 @@
 		<h3>Writer:${dto.writer}</h3>
 		<h3>DATE:${dto.regDate}</h3>
 		<h3>HITS:${dto.hits}</h3>
+		<div>
+			<textarea rows="" cols="" readonly="readonly">
+				${dto.contents}
+			</textarea>
+		</div>
 		<c:forEach items="${dto.files}" var = "f">
 			<div>
-				<a href ="../down?fileName=${board}/${f.fileName}">${f.oriName}</a>
+				<a href ="./down?fileName=${f.fileName}">${f.oriName}</a>
 			</div>
 		</c:forEach>
 	

@@ -17,7 +17,6 @@
 
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property> <!-- 데이터소스 -->
-		<!-- 배포시에 리소스 폴더 없어지고 안에 있는건 classes 폴더로 이동함 -->
 		<property name="mapperLocations" value="classpath:database/mappers/*Mapper.xml"></property>
 		<property name="configLocation" value="classpath:database/config/myBatisConfig.xml"></property>
 	</bean>
@@ -28,7 +27,6 @@
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8"></property>
-		<!-- 파일 1개당 사이즈 byte 단위 -->
 		<property name="maxUploadSizePerFile" value = "10485760"></property> 
 		<property name="maxUploadSize" value="52428800"></property>
 	</bean>

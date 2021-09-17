@@ -17,14 +17,12 @@
 
 	<dependencies>
 
-		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+ <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-
-
 		<!-- mybatis 추가 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -32,28 +30,28 @@
 			<version>3.5.7</version>
 		</dependency>
 
-		<!-- mybatis-spring 추가 -->
+	<!-- 	mybatis-spring 추가 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>2.0.6</version>
 		</dependency>
 
-		<!-- spring-jdbc 추가 -->
+	<!-- 	spring-jdbc 추가 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- ojdbc8 추가 -->
+	<!-- 	ojdbc8 추가 -->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>21.1.0.0</version>
 		</dependency>
 
-		<!-- spring-test 추가 -->
+	<!-- 	spring-test 추가 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
