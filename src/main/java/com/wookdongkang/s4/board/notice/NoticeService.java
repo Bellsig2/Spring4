@@ -1,6 +1,7 @@
 package com.wookdongkang.s4.board.notice;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wookdongkang.s4.board.BoardDTO;
 import com.wookdongkang.s4.board.BoardFilesDTO;
 import com.wookdongkang.s4.board.BoardService;
+import com.wookdongkang.s4.board.CommentsDTO;
 import com.wookdongkang.s4.util.FileManager;
 import com.wookdongkang.s4.util.Pager;
 
@@ -20,15 +22,39 @@ import com.wookdongkang.s4.util.Pager;
 public class NoticeService implements BoardService {
 	@Autowired
 	private NoticeDAO noticeDAO;
+
 	@Autowired
 	private ServletContext servletConetext;
+
 	@Autowired
 	private FileManager fileManger;
 
-	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO)throws Exception{
+	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO) throws Exception {
 		return noticeDAO.getFiles(boardDTO);
 	}
-	
+
+	public List<CommentsDTO> getCommentList(CommentsDTO commentsDTO, Pager pager) {
+		pager.setPerPage(5L);
+		pager.makeRow();
+		pager.makeNum(noticeDAO.getCommentCount(commentsDTO));
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("comments", commentsDTO);
+		map.put("pager", pager);
+		return noticeDAO.getCommentList(map);
+	}
+
+	public int updateComments(CommentsDTO commentsDTO) {
+		return noticeDAO.updateComments(commentsDTO);
+	}
+
+	public int delComments(CommentsDTO commentsDTO) {
+		return noticeDAO.delComments(commentsDTO);
+	}
+
+	public int setComments(CommentsDTO commentsDTO) throws Exception {
+		return noticeDAO.setComment(commentsDTO);
+	}
+
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
@@ -42,20 +68,19 @@ public class NoticeService implements BoardService {
 	@Override
 	public BoardDTO getSelect(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-				
+
 		noticeDAO.setHitUpdate(boardDTO);
 		return noticeDAO.getSelect(boardDTO);
 	}
 
 	@Override
-	public int setInsert(BoardDTO boardDTO, MultipartFile [] files) throws Exception {
+	public int setInsert(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
 		String realPath = servletConetext.getRealPath("/resources/upload/notice/");
 		System.out.println(realPath);
 		File file = new File(realPath);
 		int result = noticeDAO.setInsert(boardDTO);
-		
-		
-		for(MultipartFile multipartFile:files) {
+
+		for (MultipartFile multipartFile : files) {
 			String fileName = fileManger.fileSave(multipartFile, file);
 			BoardFilesDTO boardFilesDTO = new BoardFilesDTO();
 			boardFilesDTO.setFileName(fileName);
@@ -63,8 +88,6 @@ public class NoticeService implements BoardService {
 			boardFilesDTO.setNum(boardDTO.getNum());
 			result = noticeDAO.setFile(boardFilesDTO);
 		}
-		
-		
 
 		return result;
 	}
@@ -72,17 +95,16 @@ public class NoticeService implements BoardService {
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		//Files Table에서 삭제할 파일명들 조회
+		// Files Table에서 삭제할 파일명들 조회
 		List<BoardFilesDTO> ar = noticeDAO.getFiles(boardDTO);
-		
-		//어느 폴더
+
+		// 어느 폴더
 		String realPath = servletConetext.getRealPath("/resources/upload/notice/");
-		for(BoardFilesDTO boardFilesDTO: ar) {
+		for (BoardFilesDTO boardFilesDTO : ar) {
 			File file = new File(realPath, boardFilesDTO.getFileName());
 			fileManger.fileDelete(file);
-		}		
-		
-		
+		}
+
 		return noticeDAO.setDelete(boardDTO);
 	}
 

@@ -14,7 +14,7 @@ public class AjaxTestContoller {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println("t1 test");
 		modelAndView.setViewName("common/ajaxResult");
-		modelAndView.addObject("name", "iu");
+		modelAndView.addObject("result", "iu");
 		return modelAndView;
 		}
 }

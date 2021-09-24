@@ -13,6 +13,8 @@
 		<typeAlias alias="Pager" type="com.wookdongkang.s4.util.Pager"/>
 		<typeAlias type="com.wookdongkang.s4.member.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.wookdongkang.s4.board.BoardFilesDTO" alias="BoardFilesDTO"/>
+		<typeAlias type="com.wookdongkang.s4.board.CommentsDTO" alias="CommentsDTO"/>
 		<typeAlias type="java.util.List" alias="List"/>
+		<typeAlias type="java.util.Map" alias="Map"/>
 	</typeAliases>
 </configuration>
